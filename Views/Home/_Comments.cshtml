@@ -1,0 +1,13 @@
+@model Comment
+@Model.MessageId
+<form action="/CreateComment/@Model.MessageId" class="form-group" method="post">
+    <p>
+        <p><span asp-validation-for="Content"></span></p>
+        <p>
+        <textarea asp-for="Content"  id="" cols="30" rows="5"></textarea>
+        </p>
+        <p>
+        <input type="submit" value="Post a Comment" class="btn btn-success">
+        </p>
+    </p>
+</form>

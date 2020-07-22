@@ -1,0 +1,30 @@
+<a href="/logout" class="btn btn-md btn-dark"> Logout</a>
+<div class="jumbotron">
+    <h1>Welcome To Coding Dojo Wall</h1> 
+</div>
+@model Message
+
+<form asp-action="CreateMessage" class="form-group" method="post">
+    <p>
+        <h5>Post a Message</h5>
+        <p><span asp-validation-for="MessagePost" class="text-danger"></span></p>
+        <textarea asp-for="MessagePost" class="form-control" id="" cols="30" rows="10"></textarea>
+        <input type="submit" value="Post a message" class="btn btn-block btn-primary">
+    </p>
+</form>
+@foreach (var item in ViewBag.AllMessages)
+{
+    <p> @item.MessageCreator.FirstName  ================   @item.CreatedAt.ToShortDateString() @item.CreatedAt.ToShortTimeString()</p>
+    <p class="alert alert-primary">@item.MessagePost</p>
+    
+    foreach (var comments in item.Comments)
+    {
+        <p class="alert alert-success">
+            @comments.Content
+        </p>
+    }
+    <partial name="_Comments" model="new Comment(){MessageId = item.MessageId}"></partial>
+
+
+    
+}
